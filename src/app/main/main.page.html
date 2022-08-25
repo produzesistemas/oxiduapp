@@ -23,6 +23,8 @@
 <ion-content [fullscreen]="true">
 
   <div id="container">
+    <ion-card>
+      <ion-card-content>
     <ion-slides pager="true" [options]="slideOpts" #slider (ionSlidesDidLoad)="afterslidesLoad(slider)">
       <ion-slide>
         <ion-img src="assets/bg4.png"></ion-img>
@@ -31,6 +33,8 @@
         <ion-img src="assets/bg3.png"></ion-img>
       </ion-slide>
     </ion-slides>
+  </ion-card-content>
+  </ion-card>
     <div *ngIf="!hasFilter">
       <ion-grid>
         <ion-row>

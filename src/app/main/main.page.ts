@@ -62,7 +62,6 @@ export class MainPage implements OnInit {
     filter.id = state.id;
     this.establishmentService.getByState(filter)
     .subscribe(establisments => {
-      
       if (establisments.length === 0) {
         this.establishments = [];
       return this.presentToast("Nenhum registro encontrado!");
@@ -72,7 +71,6 @@ export class MainPage implements OnInit {
       this.hasFilter = true;
      }
      this.ionLoaderService.dismissLoader();
-
     });
     });
   }

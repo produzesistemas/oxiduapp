@@ -6,15 +6,15 @@
     <ion-title *ngIf="!toggled">Oxidu</ion-title>
     <ion-buttons slot="secondary">
       <ion-button (click)="toggle()" *ngIf="!toggled">
-        <ion-icon slot="icon-only" name="search" ></ion-icon>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
       <ion-button (click)="search()" *ngIf="toggled">
         <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
     </ion-buttons>
     <form [formGroup]="form">
-      <ion-searchbar formControlName="search" placeholder="Busque pelo nome" *ngIf="toggled"
-        [showCancelButton]="true" (ionCancel)="toggle()">
+      <ion-searchbar formControlName="search" placeholder="Busque pelo nome" *ngIf="toggled" [showCancelButton]="true"
+        (ionCancel)="toggle()">
       </ion-searchbar>
     </form>
   </ion-toolbar>
@@ -23,8 +23,6 @@
 <ion-content [fullscreen]="true">
 
   <div id="container">
-    <ion-card>
-      <ion-card-content>
     <ion-slides pager="true" [options]="slideOpts" #slider (ionSlidesDidLoad)="afterslidesLoad(slider)">
       <ion-slide>
         <ion-img src="assets/bg4.png"></ion-img>
@@ -33,15 +31,15 @@
         <ion-img src="assets/bg3.png"></ion-img>
       </ion-slide>
     </ion-slides>
-  </ion-card-content>
-  </ion-card>
     <div *ngIf="!hasFilter">
       <ion-grid>
         <ion-row>
-          <ion-card *ngFor="let state of states" class="container" (click)="filter(state)">
+          <ion-card color="light" *ngFor="let state of states" class="container" (click)="filter(state)">
             <ion-col>
               <ion-card-content>
-                <ion-card-subtitle color="primary">{{ state.description }}</ion-card-subtitle>
+                <ion-text>
+                  <h6>{{ state.description }}</h6>
+                </ion-text>
               </ion-card-content>
             </ion-col>
           </ion-card>
@@ -62,58 +60,24 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-      <ion-card *ngFor="let establishment of establishments">
-        <ion-card-header>
-          <ion-img [src]="getImage(establishment.imageName)"></ion-img>
-        </ion-card-header>
-        <ion-card-content>
-          <div class="ion-padding">
-            <ion-card-title color="primary">{{ establishment.description }}</ion-card-title>
-          </div>
-          <div class="ion-padding">
-            <ion-card-subtitle color="primary">{{ establishment.city.description }} / {{
-              establishment.city.state.description }}</ion-card-subtitle>
-          </div>
-          <div *ngIf="establishment.email" class="ion-padding">
-            <ion-icon color="primary" ios="mail-outline" md="mail-sharp" size="large"></ion-icon>
-            <ion-card-subtitle color="primary">{{ establishment.email }}</ion-card-subtitle>
-          </div>
-          <div *ngIf="establishment.telephone" class="ion-padding">
-            <ion-icon color="primary" ios="call-outline" md="call-sharp" size="large"></ion-icon>
-            <ion-text color="primary">
-              <h5>{{ establishment.telephone }}</h5>
-            </ion-text>
-          </div>
-          <div *ngIf="establishment.whatsApp" class="ion-padding">
-            <ion-icon color="primary" ios="logo-whatsapp" md="logo-whatsapp" size="large"></ion-icon>
-            <ion-text color="primary">
-              <h5>{{ establishment.whatsApp }}</h5>
-            </ion-text>
-          </div>
-          <div *ngIf="establishment.facebook" class="ion-padding">
-            <ion-icon color="primary" ios="logo-facebook" md="logo-facebook" size="large"></ion-icon>
-            <ion-text color="primary">
-              <h5>{{ establishment.facebook }}</h5>
-            </ion-text>
-          </div>
-          <div *ngIf="establishment.instagram" class="ion-padding">
-            <ion-icon color="primary" ios="logo-instagram" md="logo-instagram" size="large"></ion-icon>
-            <ion-text color="primary">
-              <h5>{{ establishment.instagram }}</h5>
-            </ion-text>
-          </div>
-          <div *ngIf="establishment.webSite" class="ion-padding">
-            <ion-icon color="primary" ios="globe-outline" md="globe-sharp" size="large"></ion-icon>
-            <ion-text color="primary">
-              <h5>{{ establishment.webSite }}</h5>
-            </ion-text>
-          </div>
-
-
-          <!-- <ion-button *ngIf="establishment.isPartner" expand="block" fill="outline" (click)="onOrder(establishment)">Encomendar</ion-button> -->
-        </ion-card-content>
-      </ion-card>
-
+       <ion-list *ngFor="let establishment of establishments">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <ion-img [src]="getImage(establishment.imageName)"></ion-img>
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ establishment.description }}</h2>
+            <h3>{{ establishment.city.description }} / {{
+              establishment.city.state.description }}</h3>
+            <p *ngIf="establishment.email"><ion-icon slot="start" color="primary" ios="mail-outline" md="mail-sharp" size="small"></ion-icon> {{ establishment.email }} </p>
+            <p *ngIf="establishment.telephone"><ion-icon slot="start" color="primary" ios="call-outline" md="call-sharp" size="small"></ion-icon> {{ establishment.telephone }} </p>
+            <p *ngIf="establishment.whatsApp"><ion-icon slot="start" color="primary" ios="logo-whatsapp" md="logo-whatsapp" size="small"></ion-icon> {{ establishment.whatsApp }} </p>
+            <p *ngIf="establishment.facebook"><ion-icon slot="start" color="primary" ios="logo-facebook" md="logo-facebook" size="small"></ion-icon> {{ establishment.facebook }} </p>
+            <p *ngIf="establishment.instagram"><ion-icon slot="start" color="primary" ios="logo-instagram" md="logo-instagram" size="small"></ion-icon> {{ establishment.instagram }} </p>
+            <p *ngIf="establishment.webSite"><ion-icon slot="start" color="primary" ios="globe-outline" md="globe-sharp" size="small"></ion-icon> {{ establishment.webSite }} </p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
     </div>
   </div>
 </ion-content>

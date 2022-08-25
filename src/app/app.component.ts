@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryService } from './_services/category.service';
-import { NavController, ToastController, Platform, IonRouterOutlet  } from '@ionic/angular';
+import { NavController, ToastController, Platform } from '@ionic/angular';
 import { PluginListenerHandle } from '@capacitor/core';
 import { Network } from '@capacitor/network';
 import { App } from '@capacitor/app';
@@ -22,14 +22,8 @@ export class AppComponent implements OnInit {
      private router: Router,
      private platform: Platform,
      public toastController: ToastController,
-     private navCtrl: NavController,
-     private routerOutlet: IonRouterOutlet
+     private navCtrl: NavController
      ) {
-      this.platform.backButton.subscribeWithPriority(-1, () => {
-        if (!this.routerOutlet.canGoBack()) {
-          App.exitApp();
-        }
-      });
      }
 
      async ngOnInit() {

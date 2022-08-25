@@ -61,16 +61,16 @@ export class MainPage implements OnInit {
     this.ionLoaderService.simpleLoader().then(() => {
     filter.id = state.id;
     this.establishmentService.getByState(filter)
-    .subscribe(establisments => {
+    .subscribe(async establisments => {
       if (establisments.length === 0) {
         this.establishments = [];
       return this.presentToast("Nenhum registro encontrado!");
      } else {
       this.establishments = establisments;
-      this.titleFilter = this.establishments.length + ' encontrado(s) na ' + state.description;
+      this.titleFilter = this.establishments.length + ' encontrado(s) / ' + state.description;
       this.hasFilter = true;
      }
-     this.ionLoaderService.dismissLoader();
+     await this.ionLoaderService.dismissLoader();
     });
     });
   }

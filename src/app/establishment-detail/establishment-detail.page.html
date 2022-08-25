@@ -1,0 +1,127 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">{{ title }}</ion-title>
+      </ion-toolbar>
+    </ion-header> -->
+
+  <div *ngIf="establishment">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+              <ion-img [src]="getImage(establishment.imageName)"></ion-img>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-text color="dark">
+              <h5>{{ establishment.description }}</h5>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-text color="dark">
+              <h5 [innerHTML]="establishment.details"></h5>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="establishment.email">
+          <ion-col>
+            <ion-icon ios="mail-outline" md="mail-sharp" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row class="bottomRow" *ngIf="establishment.email">
+          <ion-col>
+            <ion-text color="dark">
+              <h5>{{ establishment.email }}</h5>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="establishment.telephone">
+          <ion-col>
+            <ion-icon ios="call-outline" md="call-sharp" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row class="bottomRow" *ngIf="establishment.telephone">
+          <ion-col>
+            <ion-text color="dark">
+              <h5>{{ establishment.telephone }}</h5>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="establishment.facebook">
+          <ion-col>
+            <ion-icon ios="logo-facebook" md="logo-facebook" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row class="bottomRow" *ngIf="establishment.facebook">
+          <ion-col>
+            <ion-text color="dark">
+              <h5>{{ establishment.facebook }}</h5>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="establishment.instagram">
+          <ion-col>
+            <ion-icon ios="logo-instagram" md="logo-instagram" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row class="bottomRow" *ngIf="establishment.instagram">
+          <ion-col>
+            <ion-text color="dark">
+              <h5>{{ establishment.instagram }}</h5>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="establishment.webSite">
+          <ion-col>
+            <ion-icon ios="globe-outline" md="globe-sharp" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="establishment.webSite" class="bottomRow">
+          <ion-col>
+            <ion-text color="dark">
+              <h5>{{ establishment.webSite }}</h5>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="establishment.city">
+          <ion-col>
+            <ion-icon ios="location-outline" md="location-sharp" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row class="bottomRow"
+          *ngIf="establishment.publicPlace && establishment.postalCode && establishment.district">
+          <ion-col>
+            <ion-text color="dark">
+              <h5>{{ establishment.publicPlace }}, {{ establishment.postalCode }}, {{ establishment.district }}</h5>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row class="bottomRow" *ngIf="establishment.city">
+          <ion-col>
+            <ion-text color="dark">
+              <h5>{{ establishment.city.description }} / {{ establishment.city.state.description }}</h5>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <!-- <ion-row>
+      <ion-col>
+        <ion-button expand="block" fill="outline" (click)="onOrder()">Encomenda</ion-button>
+      </ion-col>
+    </ion-row> -->
+      </ion-grid>
+    </ion-card>
+  </div>
+</ion-content>

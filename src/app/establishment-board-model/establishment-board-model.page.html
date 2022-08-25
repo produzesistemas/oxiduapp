@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="establishment-detail"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Encomenda</ion-title>
+    </ion-toolbar>
+    </ion-header>
+    
+    <ion-content [fullscreen]="true">
+      <ion-header collapse="condense">
+        <ion-toolbar>
+          <ion-title size="large">Encomenda</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+    <div id="container">
+        <ion-card *ngFor="let boardModel of boardModels" (click)="detail(boardModel)">
+          <ion-card-header class="ion-no-padding">
+              <ion-img [src]="getImage(boardModel.imageName)"></ion-img>
+          </ion-card-header>
+          <ion-card-content class="ion-margin-top">
+            <ion-card-title>{{ boardModel.name }}</ion-card-title>
+            <!-- <ion-card-subtitle>{{ boardModel.city.description }} / {{ boardModel.city.state.description }}</ion-card-subtitle> -->
+          </ion-card-content>
+        </ion-card>   
+    </div>
+
+  </ion-content>
+  

@@ -1,0 +1,7 @@
+{
+  "name": "Oxidu",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

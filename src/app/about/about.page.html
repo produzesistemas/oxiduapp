@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">Sobre</ion-title>
+  </ion-toolbar>
+</ion-header>
+  
+  <ion-content [fullscreen]="true">
+    <div id="container">
+      <ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-img src = "assets/logo_with_name.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <hr>
+          <ion-row>
+            <ion-col>
+                <ion-card-subtitle>Desenvolvido por:</ion-card-subtitle>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+                <ion-img src = "assets/logo_produze.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <a href="https://www.produzesistemas.com.br">https://www.produzesistemas.com.br</a>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>Versão: {{ version }} </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </div>
+  </ion-content>
+  

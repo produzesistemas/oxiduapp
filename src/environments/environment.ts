@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  version: '1.0.0 dev',
+  version: '1.0.0',
   // urlApi: 'https://localhost:44359/api/',
   // urlImagesLojas: 'https://localhost:44359/Files/Store/',
   // urlImagesProducts: 'https://localhost:44359/Files/Product/',

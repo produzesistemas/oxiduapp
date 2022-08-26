@@ -22,13 +22,26 @@ ion-card {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    ion-img{
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
   }
+  }
+
+}
+
+.card-partner {
+  border-left: 3px solid var(--ion-color-primary);
 }
 
 ion-slides {
   margin: 16px;
   border-radius: 5px;
 }
+
+
 
 
 

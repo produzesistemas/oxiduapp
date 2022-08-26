@@ -32,24 +32,24 @@ export class MainPage implements OnInit {
     private ionLoaderService: IonLoadingService,
     public toastController: ToastController,
     private formBuilder: FormBuilder
-    ) { }
+  ) { }
 
-    slideOpts = {
-      initialSlide: 0,
-      slidesPerView: 1,
-      autoplay: true,
-      speed: 400
-    }
+  slideOpts = {
+    initialSlide: 0,
+    slidesPerView: 1,
+    autoplay: true,
+    speed: 400
+  }
 
-    afterslidesLoad(slides) {
-      slides.startAutoplay();
-    }
+  afterslidesLoad(slides) {
+    slides.startAutoplay();
+  }
 
   async ngOnInit() {
     this.states = this.categoryService.getStates();
     this.form = this.formBuilder.group({
       search: ['', Validators.required]
-  });
+    });
   }
 
   async filter(state) {
@@ -59,19 +59,21 @@ export class MainPage implements OnInit {
     }
     const filter: FilterDefaultModel = new FilterDefaultModel();
     this.ionLoaderService.simpleLoader().then(() => {
-    filter.id = state.id;
-    this.establishmentService.getByState(filter)
-    .subscribe(async establisments => {
-      if (establisments.length === 0) {
-        this.establishments = [];
-      return this.presentToast("Nenhum registro encontrado!");
-     } else {
-      this.establishments = establisments;
-      this.titleFilter = this.establishments.length + ' encontrado(s) / ' + state.description;
-      this.hasFilter = true;
-     }
-     await this.ionLoaderService.dismissLoader();
-    });
+      filter.id = state.id;
+      this.establishmentService.getByState(filter)
+        .subscribe(establisments => {
+          if (establisments.length === 0) {
+            this.establishments = [];
+            this.ionLoaderService.dismissLoader();
+            return this.presentToast("Nenhum registro encontrado!");
+          } else {
+            this.establishments = establisments;
+            this.titleFilter = this.establishments.length + ' encontrado(s) / ' + state.description;
+            this.hasFilter = true;
+            this.ionLoaderService.dismissLoader();
+          }
+
+        });
     });
   }
 
@@ -89,39 +91,38 @@ export class MainPage implements OnInit {
     return environment.urlImagesEstablishment + nomeImage;
   }
 
-onBackFilter() {
-  this.hasFilter = false;
-}
-
-public toggle(): void {
-  this.toggled = !this.toggled;
-}
-
-async search() {
-  if (this.form.invalid) {
-      return;
+  onBackFilter() {
+    this.hasFilter = false;
   }
-  this.networkStatus = await Network.getStatus();
-  if (this.networkStatus.connected === false) {
-    return this.presentToast("Dispositivo sem internet. Verifique a conexão e tente novamente.");
-  }
-  const filter: FilterDefaultModel = new FilterDefaultModel();
-  this.ionLoaderService.simpleLoader().then(() => {
-  filter.name = this.form.controls.search.value;
-  this.establishmentService.getByDescription(filter).subscribe(establisments => {
-    this.ionLoaderService.dismissLoader();
-    if (establisments.length === 0) {
-      this.establishments = [];
-    return this.presentToast("Nenhum registro encontrado!");
-   } else {
-    this.establishments = establisments;
-    this.titleFilter = this.establishments.length + ' encontrado(s)';
-    this.hasFilter = true;
+
+  public toggle(): void {
     this.toggled = !this.toggled;
-   }
+  }
 
-  });
-  });
-}
-
+  async search() {
+    if (this.form.invalid) {
+      return;
+    }
+    this.networkStatus = await Network.getStatus();
+    if (this.networkStatus.connected === false) {
+      return this.presentToast("Dispositivo sem internet. Verifique a conexão e tente novamente.");
+    }
+    const filter: FilterDefaultModel = new FilterDefaultModel();
+    this.ionLoaderService.simpleLoader().then(() => {
+      filter.name = this.form.controls.search.value;
+      this.establishmentService.getByDescription(filter).subscribe(establisments => {
+        if (establisments.length === 0) {
+          this.establishments = [];
+          this.ionLoaderService.dismissLoader();
+          return this.presentToast("Nenhum registro encontrado!");
+        } else {
+          this.establishments = establisments;
+          this.titleFilter = this.establishments.length + ' encontrado(s)';
+          this.hasFilter = true;
+          this.toggled = !this.toggled;
+          this.ionLoaderService.dismissLoader();
+        }
+      });
+    });
+  }
 }

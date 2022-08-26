@@ -42,8 +42,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
                     // this.toastr.error('Acesso negado.', 'Atenção!');
                     // this.authenticationService.logout();
                     this.presentToast(err.error);
-                    localStorage.clear();
-                    location.reload();
+                    // localStorage.clear();
+                    // location.reload();
                 }
 
                 if (err.status === 400) {
@@ -97,9 +97,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         const toast = await this.toastController.create({
           message: error,
           duration: 2000,
-          position: 'middle'
+          position: 'top'
         });
-    
         toast.present();
       }
 

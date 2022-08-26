@@ -60,11 +60,53 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-       <ion-list *ngFor="let establishment of establishments">
+      <ion-grid>
+        <ion-row *ngFor="let establishment of establishments">
+          <ion-col>
+            <ion-card color="light" [ngClass]="{'card-partner': establishment.isPartner}">
+              <ion-card-header>
+                <ion-img [src]="getImage(establishment.imageName)"></ion-img>
+              </ion-card-header>
+              <ion-card-content>
+                <h2>{{ establishment.description }}</h2>
+                <h3>{{ establishment.city.description }} / {{
+                  establishment.city.state.description }}</h3>
+                <p *ngIf="establishment.email">
+                  <ion-icon slot="start" color="primary" ios="mail-outline" md="mail-sharp" size="small"></ion-icon> {{
+                  establishment.email }}
+                </p>
+                <p *ngIf="establishment.telephone">
+                  <ion-icon slot="start" color="primary" ios="call-outline" md="call-sharp" size="small"></ion-icon> {{
+                  establishment.telephone }}
+                </p>
+                <p *ngIf="establishment.whatsApp">
+                  <ion-icon slot="start" color="primary" ios="logo-whatsapp" md="logo-whatsapp" size="small"></ion-icon>
+                  {{ establishment.whatsApp }}
+                </p>
+                <p *ngIf="establishment.facebook">
+                  <ion-icon slot="start" color="primary" ios="logo-facebook" md="logo-facebook" size="small"></ion-icon>
+                  {{ establishment.facebook }}
+                </p>
+                <p *ngIf="establishment.instagram">
+                  <ion-icon slot="start" color="primary" ios="logo-instagram" md="logo-instagram" size="small">
+                  </ion-icon> {{ establishment.instagram }}
+                </p>
+                <p *ngIf="establishment.webSite">
+                  <ion-icon slot="start" color="primary" ios="globe-outline" md="globe-sharp" size="small"></ion-icon>
+                  {{ establishment.webSite }}
+                </p>
+
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+      <!-- <ion-list *ngFor="let establishment of establishments">
         <ion-item>
-          <ion-thumbnail slot="start">
+          <ion-avatar slot="start">
             <ion-img [src]="getImage(establishment.imageName)"></ion-img>
-          </ion-thumbnail>
+          </ion-avatar>
           <ion-label>
             <h2>{{ establishment.description }}</h2>
             <h3>{{ establishment.city.description }} / {{
@@ -76,8 +118,9 @@
             <p *ngIf="establishment.instagram"><ion-icon slot="start" color="primary" ios="logo-instagram" md="logo-instagram" size="small"></ion-icon> {{ establishment.instagram }} </p>
             <p *ngIf="establishment.webSite"><ion-icon slot="start" color="primary" ios="globe-outline" md="globe-sharp" size="small"></ion-icon> {{ establishment.webSite }} </p>
           </ion-label>
+          <ion-icon *ngIf="establishment.isPartner" size="large" name="close-circle" slot="end"></ion-icon>
         </ion-item>
-      </ion-list>
+      </ion-list> -->
     </div>
   </div>
 </ion-content>

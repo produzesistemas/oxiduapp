@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 
@@ -10,17 +9,11 @@ import { environment } from 'src/environments/environment';
 })
 export class AboutPage implements OnInit {
   public version: string;
-  lstCategorys: any[];
 
-  constructor(
-    private activatedRoute: ActivatedRoute, 
-    private router: Router,
-    ) { }
+  constructor() { }
 
   ngOnInit() {
-    // this.title = "Home";
     this.version = environment.version;
-    
   }
 
 }

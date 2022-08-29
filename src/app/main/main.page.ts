@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../_services/category.service';
-import { NavController, ToastController } from '@ionic/angular';
+import { Platform, ToastController } from '@ionic/angular';
 import { PluginListenerHandle } from '@capacitor/core';
 import { Network } from '@capacitor/network';
 import { FilterDefaultModel } from '../_model/filter-default-model';
@@ -27,12 +26,14 @@ export class MainPage implements OnInit {
   form: FormGroup;
   constructor(
     private categoryService: CategoryService,
-    private router: Router,
     private establishmentService: EstablishmentService,
+    private platform: Platform,
     private ionLoaderService: IonLoadingService,
     public toastController: ToastController,
     private formBuilder: FormBuilder
-  ) { }
+  ) {
+
+  }
 
   slideOpts = {
     initialSlide: 0,
@@ -61,7 +62,7 @@ export class MainPage implements OnInit {
     this.ionLoaderService.simpleLoader().then(() => {
       filter.id = state.id;
       this.establishmentService.getByState(filter)
-        .subscribe(establisments => {
+        .subscribe(async establisments => {
           if (establisments.length === 0) {
             this.establishments = [];
             this.ionLoaderService.dismissLoader();
@@ -110,7 +111,7 @@ export class MainPage implements OnInit {
     const filter: FilterDefaultModel = new FilterDefaultModel();
     this.ionLoaderService.simpleLoader().then(() => {
       filter.name = this.form.controls.search.value;
-      this.establishmentService.getByDescription(filter).subscribe(establisments => {
+      this.establishmentService.getByDescription(filter).subscribe(async establisments => {
         if (establisments.length === 0) {
           this.establishments = [];
           this.ionLoaderService.dismissLoader();

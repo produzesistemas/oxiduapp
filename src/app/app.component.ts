@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryService } from './_services/category.service';
-import { NavController, ToastController, Platform } from '@ionic/angular';
+import { NavController, ToastController, Platform, IonRouterOutlet } from '@ionic/angular';
 import { PluginListenerHandle } from '@capacitor/core';
 import { Network } from '@capacitor/network';
 import { App } from '@capacitor/app';
@@ -16,18 +16,23 @@ export class AppComponent implements OnInit {
   toggle = false;
   networkStatus: any;
   networkListener: PluginListenerHandle;
-  
+
   constructor(
     private categoryService: CategoryService,
-     private router: Router,
-     private platform: Platform,
-     public toastController: ToastController,
-     private navCtrl: NavController
-     ) {
-     }
+    private router: Router,
+    private platform: Platform,
+    public toastController: ToastController,
+    //  private routerOutlet: IonRouterOutlet,
+    private navCtrl: NavController
+  ) {
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      App.exitApp();
+    });
+  }
 
-     async ngOnInit() {
+  async ngOnInit() {
     this.states = this.categoryService.getStates();
+
   }
 
   sidemenuClick() {

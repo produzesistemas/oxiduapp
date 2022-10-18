@@ -25,9 +25,9 @@ export class EstablishmentService extends GenericHttpService<Establishment> {
       return this.postAll('establishment/filter', filter);
     }
 
-    // filterAnonymous(filter: any) {
-    //   return this.postAll('establishment/filterAnonymous', filter);
-    // }
+    getPagination(filter: any) {
+      return this.postAll('establishment/getPagination', filter);
+    }
 
   deleteById(entity) {
           return this.post('establishment/delete', entity);

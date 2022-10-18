@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "oxiduapp",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

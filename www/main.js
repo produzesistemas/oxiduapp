@@ -587,16 +587,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppComponent = class AppComponent {
-  constructor(categoryService, router, platform, toastController, //  private routerOutlet: IonRouterOutlet,
-  navCtrl) {
+  constructor(categoryService, router, platform, toastController, routerOutlet, navCtrl) {
     this.categoryService = categoryService;
     this.router = router;
     this.platform = platform;
     this.toastController = toastController;
+    this.routerOutlet = routerOutlet;
     this.navCtrl = navCtrl;
     this.toggle = false;
     this.platform.backButton.subscribeWithPriority(10, () => {
-      _capacitor_app__WEBPACK_IMPORTED_MODULE_5__.App.exitApp();
+      if (!this.routerOutlet.canGoBack()) {
+        _capacitor_app__WEBPACK_IMPORTED_MODULE_5__.App.exitApp();
+      }
     });
   }
 
@@ -653,6 +655,8 @@ AppComponent.ctorParameters = () => [{
   type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.Platform
 }, {
   type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.ToastController
+}, {
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonRouterOutlet
 }, {
   type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.NavController
 }];
